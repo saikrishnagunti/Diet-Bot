@@ -1,4 +1,4 @@
-```markdown
+markdown
 # 🥗 NutriGuide Pro • Bio-Engine Clinical Diet Architect
 
 [![Streamlit](https://img.shields.io/badge/Frontend-Streamlit%201.35%2B-FF4B4B.svg)](https://streamlit.io/)
