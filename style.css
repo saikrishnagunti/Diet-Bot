@@ -216,7 +216,7 @@ div[data-testid="stBottomBlockContainer"],
     outline: none !important;
 }
 
-/* Text & Placeholder Styling */
+/* Text & Caret Styling */
 [data-testid="stChatInput"] textarea {
     color: #0f172a !important;
     -webkit-text-fill-color: #0f172a !important;
@@ -225,9 +225,19 @@ div[data-testid="stBottomBlockContainer"],
     font-weight: 600 !important;
 }
 
+/* 1. Unfocused / Resting State: Clearly visible placeholder text */
 [data-testid="stChatInput"] textarea::placeholder {
-    color: #475569 !important;
-    -webkit-text-fill-color: #475569 !important;
+    color: #334155 !important;
+    -webkit-text-fill-color: #334155 !important;
+    opacity: 1 !important;
+    transition: opacity 0.2s ease !important;
+}
+
+/* 2. Focused / Selected State: Instant disappearance when clicked */
+[data-testid="stChatInput"] textarea:focus::placeholder {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    opacity: 0 !important;
 }
 
 /* Send Button Icon */
