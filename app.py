@@ -13,14 +13,14 @@ env_path = Path(__file__).resolve().parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
 st.set_page_config(
-    page_title="NutriGuide Pro • Bio-Engine Modeling",
+    page_title="DietBot • Bio-Engine Clinical Diet Architect",
     page_icon="🥗",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # -------------------------------------------------------------------------
-# 2. Local Asset Loader: 45% Translucent Full-Screen Background
+# 2. Local Asset Loader: Full-Screen Background
 # -------------------------------------------------------------------------
 def get_base64_image(image_path: Path) -> str:
     if image_path.exists():
@@ -33,7 +33,6 @@ bg_image_path = assets_dir / "background.jpg"
 bg_base64 = get_base64_image(bg_image_path)
 
 if bg_base64:
-    # Anchor the background image seamlessly behind both the main area and the sidebar
     st.markdown(
         f"""
         <style>
@@ -55,11 +54,9 @@ if bg_base64:
     )
 
 # Load External Stylesheet
-# Load External Stylesheet with Cache Busting
 css_path = Path(__file__).resolve().parent / "style.css"
 if css_path.exists():
     with open(css_path, "r", encoding="utf-8") as f:
-        # Appends file modification time to prevent browser caching
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 # API Key Check
@@ -75,19 +72,19 @@ if not api_key:
 # 3. Clinical System Instructions & Strict Negative Guardrails
 # -------------------------------------------------------------------------
 SYSTEM_INSTRUCTION = """
-You are 'NutriGuide Pro', a clinical nutrition architect and diet planner.
+You are 'DietBot', a clinical nutrition architect and precision metabolic diet planner.
 
 CORE CAPABILITIES:
 - Calculate daily caloric targets, macronutrient distributions (Protein, Carbs, Fats), and structure calibrated meal architectures.
 - Structure meal recommendations clearly: Breakfast, Lunch, Dinner, and Snacks.
-- Include estimated gram weights, portions, and macro targets for each meal.
+- Include estimated gram weights, portions, and macro targets for each meal based on user biometrics.
 
 STRICT BOUNDARY GUARDRAILS (ZERO TOLERANCE):
 1. NO COOKING RECIPES OR STEP-BY-STEP PREPARATIONS:
    - You are a clinical diet planner, NOT a chef or recipe repository.
    - If a user asks 'how to cook', 'how to make [dish]', culinary preparations, pan temperatures, or step-by-step kitchen instructions (e.g., 'how to make chicken curry', 'how to bake protein bars'):
    - DECLINE IMMEDIATELY using this exact refusal:
-     "I am your Clinical Diet Architect, not a culinary chef. I can calculate the caloric, macronutrient, and portion targets for chicken curry in your daily meal plan, but I do not provide cooking steps or recipes. Would you like me to calibrate its macros for your diet?"
+     "I am DietBot, your Clinical Diet Architect, not a culinary chef. I can calculate the caloric, macronutrient, and portion targets for this item in your calibrated meal plan, but I do not provide cooking steps or recipes. Would you like me to calibrate its macros for your diet?"
 
 2. CLINICAL SAFETY DISCLAIMER:
    - Include a brief medical disclaimer if the user mentions chronic conditions (e.g., diabetes, renal disease, hypertension, cardiovascular conditions, pregnancy).
@@ -118,27 +115,52 @@ with st.sidebar:
     activity = st.selectbox(
         "Activity Index",
         [
-            "Sedentary (desk work, low exercise)",
-            "Lightly Active (1-3 sessions/wk)",
-            "Moderately Active (3-5 sessions/wk)",
-            "Very Active (heavy exercise 6-7 days/wk)"
+            "Basal Metabolic Rate Only (Bed rest / Comatose)",
+            "Sedentary (desk work, minimal movement)",
+            "Lightly Active (light exercise / sports 1-3 days/wk)",
+            "Moderately Active (moderate exercise / sports 3-5 days/wk)",
+            "Very Active (heavy exercise / hard sports 6-7 days/wk)",
+            "Extremely Active (hard daily training / physical labor)"
         ],
-        index=3
+        index=4
     )
 
     primary_directive = st.selectbox(
         "Primary Goal",
         [
-            "Lean Hypertrophy / Clean Surplus (+400 kcal)",
-            "Aggressive Fat Loss / Deficit (-500 kcal)",
-            "Moderate Fat Loss (-300 kcal)",
-            "Metabolic Maintenance"
-        ]
+            "Aggressive Fat Loss / Steep Deficit (-500 kcal)",
+            "Moderate Fat Loss / Steady Cut (-350 kcal)",
+            "Conservative Fat Loss / Gentle Cut (-200 kcal)",
+            "Metabolic Maintenance & Body Recomposition (±0 kcal)",
+            "Lean Hypertrophy / Clean Surplus (+250 kcal)",
+            "Accelerated Mass Gain / Bulking Phase (+450 kcal)",
+            "Endurance Performance Fueling (+300 kcal)"
+        ],
+        index=4
     )
 
     diet_tags = st.multiselect(
         "Dietary Tags & Exclusions",
-        ["High-Protein", "Vegetarian", "Vegan", "Gluten-Free", "Dairy-Free", "Nut Allergy", "Halal"],
+        [
+            "High-Protein",
+            "Low-Carb / Ketogenic",
+            "Vegetarian",
+            "Vegan (Plant-Based)",
+            "Pescatarian",
+            "Gluten-Free (Celiac)",
+            "Dairy-Free (Lactose-Free)",
+            "Nut Allergy (Peanut & Tree Nut)",
+            "Egg-Free",
+            "Soy-Free",
+            "Shellfish-Free",
+            "Halal",
+            "Kosher",
+            "Low-FODMAP (IBS Protocol)",
+            "Diabetic-Friendly (Low Glycemic)",
+            "Renal / Low Sodium",
+            "Heart-Healthy (Low Saturated Fat)",
+            "Intermittent Fasting (16/8 Structure)"
+        ],
         default=["High-Protein"]
     )
 
@@ -149,19 +171,27 @@ with st.sidebar:
         bmr = (10 * weight_kg) + (6.25 * height_cm) - (5 * age) - 161
 
     multipliers = {
-        "Sedentary (desk work, low exercise)": 1.2,
-        "Lightly Active (1-3 sessions/wk)": 1.375,
-        "Moderately Active (3-5 sessions/wk)": 1.55,
-        "Very Active (heavy exercise 6-7 days/wk)": 1.725
+        "Basal Metabolic Rate Only (Bed rest / Comatose)": 1.0,
+        "Sedentary (desk work, minimal movement)": 1.2,
+        "Lightly Active (light exercise / sports 1-3 days/wk)": 1.375,
+        "Moderately Active (moderate exercise / sports 3-5 days/wk)": 1.55,
+        "Very Active (heavy exercise / hard sports 6-7 days/wk)": 1.725,
+        "Extremely Active (hard daily training / physical labor)": 1.9
     }
     tdee = bmr * multipliers[activity]
 
-    if "Surplus" in primary_directive:
-        target_calories = int(tdee + 400)
-    elif "Aggressive" in primary_directive:
+    if "Steep Deficit" in primary_directive:
         target_calories = int(tdee - 500)
-    elif "Moderate" in primary_directive:
-        target_calories = int(tdee - 300)
+    elif "Steady Cut" in primary_directive:
+        target_calories = int(tdee - 350)
+    elif "Gentle Cut" in primary_directive:
+        target_calories = int(tdee - 200)
+    elif "Clean Surplus" in primary_directive:
+        target_calories = int(tdee + 250)
+    elif "Accelerated Mass" in primary_directive:
+        target_calories = int(tdee + 450)
+    elif "Endurance Performance" in primary_directive:
+        target_calories = int(tdee + 300)
     else:
         target_calories = int(tdee)
 
@@ -183,7 +213,7 @@ if "client" not in st.session_state:
 
 if "chat" not in st.session_state or st.session_state.chat is None:
     st.session_state.chat = st.session_state.client.chats.create(
-        model="gemini-3.6-flash",
+        model="gemini-3.5-flash-lite",
         config=types.GenerateContentConfig(
             system_instruction=SYSTEM_INSTRUCTION,
             temperature=0.2
@@ -194,86 +224,23 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 
 # -------------------------------------------------------------------------
-# 6. Header & Frosted Metric Cards
+# 6. Prominent Brand Tagline & Frosted Metric Cards
 # -------------------------------------------------------------------------
-# Force-render the collapsed sidebar toggle as a floating white box
+# Enhanced, larger, full-width tagline banner
 st.markdown(
     """
-    <style>
-    /* 1. CLOSED STATE (>>): Targets all active Streamlit collapsed toggle selectors */
-    [data-testid="collapsedControl"],
-    [data-testid="collapsedControl"] button,
-    [data-testid="stSidebarCollapsedControl"],
-    [data-testid="stSidebarCollapsedControl"] button,
-    header[data-testid="stHeader"] button[data-testid="baseButton-headerNoPadding"],
-    header[data-testid="stHeader"] button[aria-label*="sidebar" i],
-    header[data-testid="stHeader"] > div:first-child button {
-        background-color: #ffffff !important;
-        background: #ffffff !important;
-        border: 2px solid #cbd5e1 !important;
-        border-radius: 10px !important;
-        width: 38px !important;
-        height: 38px !important;
-        min-width: 38px !important;
-        min-height: 38px !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35) !important;
-        cursor: pointer !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        z-index: 100000 !important;
-        margin: 8px 0 0 12px !important;
-        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-
-    /* Dark chevron arrows inside the box */
-    [data-testid="collapsedControl"] svg,
-    [data-testid="collapsedControl"] button svg,
-    header[data-testid="stHeader"] button[data-testid="baseButton-headerNoPadding"] svg,
-    header[data-testid="stHeader"] button[aria-label*="sidebar" i] svg,
-    header[data-testid="stHeader"] > div:first-child button svg,
-    header[data-testid="stHeader"] > div:first-child button span {
-        fill: #0f172a !important;
-        stroke: #0f172a !important;
-        color: #0f172a !important;
-        width: 20px !important;
-        height: 20px !important;
-        font-size: 20px !important;
-    }
-
-    /* Hover effect */
-    [data-testid="collapsedControl"]:hover button,
-    header[data-testid="stHeader"] button[data-testid="baseButton-headerNoPadding"]:hover,
-    header[data-testid="stHeader"] button[aria-label*="sidebar" i]:hover {
-        background-color: #f8fafc !important;
-        border-color: #0284c7 !important;
-        box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4) !important;
-        transform: scale(1.05);
-    }
-
-    /* 2. OPEN STATE (<<): Ensure no white box appears inside the open sidebar */
-    section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"],
-    section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] button,
-    section[data-testid="stSidebar"] button[data-testid="baseButton-headerNoPadding"],
-    section[data-testid="stSidebar"] button[aria-label*="sidebar" i] {
-        background: transparent !important;
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        width: auto !important;
-        height: auto !important;
-        min-width: unset !important;
-        min-height: unset !important;
-        margin: 0 !important;
-    }
-    </style>
+    <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 14px; width: 100%;">
+        <div style="background: rgba(255, 255, 255, 0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1.5px solid rgba(255, 255, 255, 0.9); padding: 10px 24px; border-radius: 40px; box-shadow: 0 6px 20px rgba(15,23,42,0.08); display: inline-flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.15rem; font-weight: 600; color: #1e293b; letter-spacing: 0.02em;">
+                Precision Bio-Engine Architecture Powered by 
+                <span style="background: linear-gradient(135deg, #0284c7, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; font-size: 1.25rem; letter-spacing: -0.03em;">DIET BOT</span>
+                — Fuel Your Biology with Exact Science.
+            </span>
+        </div>
+    </div>
     """,
     unsafe_allow_html=True
 )
-
-st.markdown("<div style='height: 14px;'></div>", unsafe_allow_html=True)
 
 # 4-Column Metric Cards
 col1, col2, col3, col4 = st.columns(4)
@@ -345,7 +312,7 @@ with dcol4:
 st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
 
 # -------------------------------------------------------------------------
-# 7. Multi-Turn Conversation Feed
+# 7. Multi-Turn Conversation Feed & Biometric State Injection
 # -------------------------------------------------------------------------
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
@@ -355,14 +322,34 @@ user_query = st.chat_input("Inquire about meal distributions, macro adjustments,
 query_to_send = active_directive or user_query
 
 if query_to_send:
+    # 1. Display only the user's clean message in the UI
     st.session_state.messages.append({"role": "user", "content": query_to_send})
     with st.chat_message("user"):
         st.markdown(query_to_send)
 
+    # 2. Bundle current sidebar parameters into an internal context wrapper
+    biometric_context = (
+        f"[CURRENT USER BIOMETRICS & METABOLIC CALIBRATION]\n"
+        f"- Sex: {gender}\n"
+        f"- Age: {age} yrs\n"
+        f"- Weight: {weight_kg} kg\n"
+        f"- Height: {height_cm} cm\n"
+        f"- Activity Index: {activity}\n"
+        f"- Primary Directives: {primary_directive}\n"
+        f"- Dietary Tags & Exclusions: {tags_str}\n"
+        f"- Computed BMR: {int(bmr)} kcal\n"
+        f"- Computed TDEE: {int(tdee)} kcal\n"
+        f"- Daily Caloric Target: {target_calories} kcal\n"
+        f"- Target Macros: Protein {protein_target}g, Fats {fat_target}g, Carbs {carb_target}g\n"
+        f"--------------------------------------------------\n"
+        f"USER REQUEST: {query_to_send}"
+    )
+
     with st.chat_message("assistant"):
         with st.spinner("Calibrating metabolic targets..."):
             try:
-                response = st.session_state.chat.send_message(query_to_send)
+                # Dispatch the context-enriched prompt to Gemini
+                response = st.session_state.chat.send_message(biometric_context)
                 st.markdown(response.text)
                 st.session_state.messages.append({"role": "assistant", "content": response.text})
             except Exception as e:

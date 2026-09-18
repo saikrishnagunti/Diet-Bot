@@ -1,5 +1,4 @@
-markdown
-# 🥗 NutriGuide Pro • Bio-Engine Clinical Diet Architect
+# 🥗 Diet Bot • Bio-Engine Clinical Diet Architect
 
 [![Streamlit](https://img.shields.io/badge/Frontend-Streamlit%201.35%2B-FF4B4B.svg)](https://streamlit.io/)
 [![LLM Engine](https://img.shields.io/badge/LLM-Gemini%203.6%20Flash-4285F4.svg)](https://ai.google.dev/)
@@ -7,7 +6,7 @@ markdown
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-NutriGuide Pro is an AI-powered clinical nutritional architecture and metabolic modeling platform. Designed as a high-fidelity alternative to generic recipe generators, it combines the **Mifflin-St Jeor metabolic equations** with **Google Gemini 3.6 Flash** to compute individualized caloric, macronutrient, and daily meal targets under strict domain-level non-culinary guardrails.
+Diet Bot is an AI-powered clinical nutritional architecture and metabolic modeling platform. Designed as a high-fidelity alternative to generic recipe generators, it combines the **Mifflin-St Jeor metabolic equations** with **Google Gemini 3.5 Flash lite** to compute individualized caloric, macronutrient, and daily meal targets under strict domain-level non-culinary guardrails.
 
 ---
 
