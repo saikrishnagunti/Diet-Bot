@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap');
+
+/* -------------------------------------------------------------
+   1. GLOBAL CANVAS & CLEAN CONTAINER SPACING
+   ------------------------------------------------------------- */
+html, body, [class*="css"] {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* App Viewport */
+.block-container {
+    padding-top: 1.8rem !important;
+    padding-bottom: 7.5rem !important; /* Buffer so messages don't hide under the floating input */
+    max-width: 95% !important;
+}
+
+header[data-testid="stHeader"] {
+    background: transparent !important;
+}
+
+/* -------------------------------------------------------------
+   2. DISTINCT SMOKE-GREY TINTED SIDEBAR (Image Subtly Visible)
+   ------------------------------------------------------------- */
+[data-testid="stSidebar"], 
+[data-testid="stSidebar"] > div:first-child {
+    background-color: rgba(30, 41, 59, 0.42) !important; /* Cool slate-grey frost */
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-right: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 4px 0 24px rgba(15, 23, 42, 0.12) !important;
+}
+
+[data-testid="stSidebar"] h1, 
+[data-testid="stSidebar"] h2, 
+[data-testid="stSidebar"] h3,
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] p {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+}
+
+/* -------------------------------------------------------------
+   3. DASHBOARD METRIC CARDS (Frosted White Glass)
+   ------------------------------------------------------------- */
+.metric-card {
+    background: rgba(255, 255, 255, 0.65) !important;
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    border-radius: 16px !important;
+    padding: 18px 20px !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3.5px;
+    background: linear-gradient(90deg, #0284c7, #10b981);
+}
+
+.metric-card:hover {
+    transform: translateY(-3px) !important;
+    border-color: #0284c7 !important;
+    box-shadow: 0 14px 34px rgba(2, 132, 199, 0.18) !important;
+}
+
+.metric-label {
+    color: #334155 !important;
+    font-size: 0.76rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+}
+
+.metric-val {
+    color: #0f172a !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 1.8rem !important;
+    font-weight: 800 !important;
+    margin-top: 4px !important;
+}
+
+.metric-unit {
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    color: #0284c7 !important;
+}
+
+.macro-progress {
+    height: 4.5px;
+    background: rgba(148, 163, 184, 0.35);
+    border-radius: 4px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.macro-progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #0284c7, #10b981);
+}
+
+/* -------------------------------------------------------------
+   4. ACTION BUTTONS & PRESETS
+   ------------------------------------------------------------- */
+div.stButton > button {
+    background: rgba(255, 255, 255, 0.75) !important;
+    color: #0f172a !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    font-size: 0.88rem !important;
+    padding: 0.65rem 1.1rem !important;
+    width: 100% !important;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+div.stButton > button:hover {
+    background: #0284c7 !important;
+    border-color: #0284c7 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(2, 132, 199, 0.30) !important;
+}
+
+div.stButton > button:hover p {
+    color: #ffffff !important;
+}
+
+/* -------------------------------------------------------------
+   5. CHAT MESSAGES
+   ------------------------------------------------------------- */
+[data-testid="stChatMessage"] {
+    background: rgba(255, 255, 255, 0.78) !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+    border-radius: 16px !important;
+    padding: 20px 24px !important;
+    margin-bottom: 16px !important;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+}
+
+[data-testid="stChatMessage"] p, 
+[data-testid="stChatMessage"] li, 
+[data-testid="stChatMessage"] span, 
+[data-testid="stChatMessage"] div {
+    color: #0f172a !important;
+    font-size: 0.98rem !important;
+    font-weight: 500 !important;
+    line-height: 1.7 !important;
+}
+
+[data-testid="stChatMessage"] strong {
+    color: #000000 !important;
+    font-weight: 800 !important;
+}
+
+/* -------------------------------------------------------------
+   6. FLOATING CAPSULE CHAT INPUT (No Inner White Box)
+   ------------------------------------------------------------- */
+/* Neutralize all full-width bottom bar wrappers */
+div[data-testid="stBottom"],
+div[data-testid="stBottom"] > div,
+div[data-testid="stBottomBlockContainer"],
+.stChatFloatingInputContainer,
+[data-testid="stChatInputContainer"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Outer Floating Pill */
+[data-testid="stChatInput"] {
+    background: rgba(255, 255, 255, 0.15) !important; /* Frosted glass effect */
+    border: 3px solid #ffffff !important;              /* Thick white outline */
+    border-radius: 40px !important;
+    padding: 8px 24px !important;
+    margin: 0 auto 24px auto !important;
+    max-width: 900px !important;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.22) !important;
+    backdrop-filter: blur(18px) !important;
+    -webkit-backdrop-filter: blur(18px) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Clicked / Focused State */
+[data-testid="stChatInput"]:focus-within {
+    background: #ffffff !important;
+    border: 3px solid #0284c7 !important;
+    box-shadow: 
+        0 18px 42px rgba(2, 132, 199, 0.28),
+        0 0 0 3px rgba(2, 132, 199, 0.2) !important;
+    transform: translateY(-2px);
+}
+
+/* FIX: Force ALL inner containers and the textarea to be 100% transparent */
+[data-testid="stChatInput"] > div,
+[data-testid="stChatInput"] > div > div,
+[data-testid="stChatInput"] textarea {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Text & Placeholder Styling */
+[data-testid="stChatInput"] textarea {
+    color: #0f172a !important;
+    -webkit-text-fill-color: #0f172a !important;
+    caret-color: #0284c7 !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+}
+
+[data-testid="stChatInput"] textarea::placeholder {
+    color: #475569 !important;
+    -webkit-text-fill-color: #475569 !important;
+}
+
+/* Send Button Icon */
+[data-testid="stChatInput"] button {
+    color: #0284c7 !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+/* -------------------------------------------------------------
+   7. SIDEBAR TOGGLE BUTTON (Compact White Box When Closed Only)
+   ------------------------------------------------------------- */
+[data-testid="collapsedControl"],
+[data-testid="collapsedControl"] button,
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="stSidebarCollapsedControl"] button,
+header[data-testid="stHeader"] button[data-testid="baseButton-headerNoPadding"],
+header[data-testid="stHeader"] button[aria-label*="sidebar" i],
+header[data-testid="stHeader"] > div:first-child button {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    border: 2px solid #cbd5e1 !important;
+    border-radius: 10px !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35) !important;
+    cursor: pointer !important;
+    margin: 8px 0 0 12px !important;
+}
+
+[data-testid="collapsedControl"] svg,
+[data-testid="collapsedControl"] button svg,
+header[data-testid="stHeader"] button[data-testid="baseButton-headerNoPadding"] svg,
+header[data-testid="stHeader"] button[aria-label*="sidebar" i] svg {
+    fill: #0f172a !important;
+    stroke: #0f172a !important;
+    color: #0f172a !important;
+    width: 20px !important;
+    height: 20px !important;
+}
+
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"],
+section[data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] button,
+section[data-testid="stSidebar"] button[data-testid="baseButton-headerNoPadding"],
+section[data-testid="stSidebar"] button[aria-label*="sidebar" i] {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: auto !important;
+    height: auto !important;
+}
