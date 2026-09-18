@@ -121,7 +121,3 @@ streamlit run app.py
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](https://www.google.com/search?q=LICENSE&utm_source=gemini) file for details.
-
-```
-
-```
