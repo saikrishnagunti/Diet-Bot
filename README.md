@@ -70,7 +70,7 @@ diet-planner/
 ### 1. Clone the Repository
 
 ```bash
-git clone [https://github.com/saikrishnagunti/NutriGuide-Pro-Diet-Bot-.git](https://github.com/saikrishnagunti/NutriGuide-Pro-Diet-Bot-.git)
+git clone [https://github.com/saikrishnagunti/Diet-Bot-.git](https://github.com/saikrishnagunti/Diet-Bot-.git)
 cd YOUR_REPOSITORY
 
 ```
