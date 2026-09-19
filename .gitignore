@@ -1,9 +1,17 @@
-# Environment secrets
+# Environment variables & API credentials
 .env
 *.env
 
-# Streamlit local configurations
+# Streamlit local configurations & secrets
 .streamlit/secrets.toml
+.streamlit/cache/
+
+# Local logs and generated reports
+*.log
+*.out
+*.tmp
+coverage.xml
+htmlcov/
 
 # Python cache & bytecode
 __pycache__/
@@ -15,7 +23,20 @@ venv/
 .venv/
 env/
 
-# Editor & system files
+# Editor & OS files
 .vscode/
+.idea/
 .DS_Store
 Thumbs.db
+
+# Intermediate and duplicate test files
+app_*.py
+style_*.py
+cli_test*.py
+
+# Local exports & test artifacts
+*.pdf
+*.png
+*.html
+.pytest_cache/
+.coverage

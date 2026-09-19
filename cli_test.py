@@ -42,7 +42,7 @@ def run_diet_bot():
     
     # client.chats.create retains context memory across turns automatically
     chat = client.chats.create(
-        model="gemini-3.6-flash",
+        model="gemini-3.5-flash-lite",
         config=types.GenerateContentConfig(
             system_instruction=SYSTEM_INSTRUCTION,
             temperature=0.4  # Balanced between structure and practical meal ideas

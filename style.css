@@ -335,3 +335,314 @@ section[data-testid="stSidebar"] button[aria-label*="sidebar" i] {
     width: auto !important;
     height: auto !important;
 }
+
+/* Keep the collapsed-sidebar control white, but make its chevron readable. */
+[data-theme="dark"] [data-testid="collapsedControl"] svg,
+.stApp[data-theme="dark"] [data-testid="collapsedControl"] svg,
+[data-theme="dark"] [data-testid="collapsedControl"] button svg,
+.stApp[data-theme="dark"] [data-testid="collapsedControl"] button svg,
+[data-theme="dark"] [data-testid="stSidebarCollapsedControl"] svg,
+.stApp[data-theme="dark"] [data-testid="stSidebarCollapsedControl"] svg,
+[data-theme="dark"] header[data-testid="stHeader"] button svg,
+.stApp[data-theme="dark"] header[data-testid="stHeader"] button svg,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="collapsedControl"] svg,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="collapsedControl"] button svg,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stSidebarCollapsedControl"] svg,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) header[data-testid="stHeader"] button svg {
+    fill: #0f172a !important;
+    stroke: #0f172a !important;
+    color: #0f172a !important;
+}
+
+[data-theme="dark"] [data-testid="stExpandSidebarButton"],
+.stApp[data-theme="dark"] [data-testid="stExpandSidebarButton"],
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stExpandSidebarButton"],
+[data-theme="dark"] [data-testid="stExpandSidebarButton"] *,
+.stApp[data-theme="dark"] [data-testid="stExpandSidebarButton"] *,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stExpandSidebarButton"] * {
+    color: #0f172a !important;
+    fill: #0f172a !important;
+    stroke: #0f172a !important;
+}
+
+[data-theme="dark"] header button[data-testid="baseButton-headerNoPadding"],
+.stApp[data-theme="dark"] header button[data-testid="baseButton-headerNoPadding"],
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) header button[data-testid="baseButton-headerNoPadding"],
+[data-theme="dark"] header button[data-testid="baseButton-headerNoPadding"] *,
+.stApp[data-theme="dark"] header button[data-testid="baseButton-headerNoPadding"] *,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) header button[data-testid="baseButton-headerNoPadding"] * {
+    color: #0f172a !important;
+    fill: #0f172a !important;
+    stroke: #0f172a !important;
+}
+
+/* -------------------------------------------------------------
+   8. CLICKABLE METRIC CARD OVERLAYS
+   ------------------------------------------------------------- */
+[class*="st-key-metric-"] {
+    position: relative !important;
+    height: 132px !important;
+    min-height: 132px !important;
+    overflow: visible !important;
+}
+
+[class*="st-key-metric-"] .metric-card {
+    height: 132px !important;
+    min-height: 132px !important;
+}
+
+/* The keyed button is rendered in a separate Streamlit element after the
+   card. Remove that element from normal flow and stretch it over the card. */
+[class*="st-key-metric-"][class*="-button"] {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 10 !important;
+    margin: 0 !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+}
+
+[class*="st-key-metric-"] div.stButton,
+[class*="st-key-metric-"] [data-testid="stButton"] {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 10 !important;
+    margin: 0 !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+}
+
+[class*="st-key-metric-"] div.stButton > button,
+[class*="st-key-metric-"] [data-testid="stButton"] button {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    cursor: pointer !important;
+    position: absolute !important;
+    inset: 0 !important;
+}
+
+[class*="st-key-metric-"] [data-testid="stButton"] button:hover,
+[class*="st-key-metric-"] [data-testid="stButton"] button:focus,
+[class*="st-key-metric-"] [data-testid="stButton"] button:active {
+    opacity: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* The transparent button receives the pointer, so apply the hover treatment
+   to the keyed card container instead of relying on .metric-card:hover. */
+[class*="st-key-metric-"]:hover .metric-card {
+    transform: translateY(-3px) !important;
+    border-color: #0284c7 !important;
+    box-shadow: 0 14px 34px rgba(2, 132, 199, 0.18) !important;
+}
+
+[class*="st-key-metric-"] .metric-card {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+/* -------------------------------------------------------------
+   9. TAGLINE AND DIRECTIVE SURFACES
+   ------------------------------------------------------------- */
+.tagline-shell {
+    background: rgba(255, 255, 255, 0.72) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
+    padding: 10px 24px !important;
+    border-radius: 40px !important;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.tagline-copy {
+    color: #1e293b !important;
+    font-size: 1.15rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
+}
+
+.tagline-brand {
+    color: #0284c7 !important;
+    font-weight: 900 !important;
+    font-size: 1.25rem !important;
+}
+
+.directive-heading {
+    color: #0f172a !important;
+}
+
+/* -------------------------------------------------------------
+   10. EXPLICIT DARK THEME OVERRIDES
+   ------------------------------------------------------------- */
+[data-theme="dark"] .metric-card,
+.stApp[data-theme="dark"] .metric-card,
+[data-theme="dark"] .tagline-shell,
+.stApp[data-theme="dark"] .tagline-shell,
+[data-theme="dark"] [data-testid="stChatMessage"],
+.stApp[data-theme="dark"] [data-testid="stChatMessage"],
+[data-theme="dark"] [data-testid="stChatInput"],
+.stApp[data-theme="dark"] [data-testid="stChatInput"] {
+    background: rgba(0, 0, 0, 0.68) !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] .metric-label,
+.stApp[data-theme="dark"] .metric-label,
+[data-theme="dark"] .metric-val,
+.stApp[data-theme="dark"] .metric-val,
+[data-theme="dark"] .tagline-copy,
+.stApp[data-theme="dark"] .tagline-copy,
+[data-theme="dark"] .directive-heading,
+.stApp[data-theme="dark"] .directive-heading,
+[data-theme="dark"] [data-testid="stChatMessage"] p,
+.stApp[data-theme="dark"] [data-testid="stChatMessage"] p,
+[data-theme="dark"] [data-testid="stChatMessage"] li,
+.stApp[data-theme="dark"] [data-testid="stChatMessage"] li,
+[data-theme="dark"] [data-testid="stChatMessage"] span,
+.stApp[data-theme="dark"] [data-testid="stChatMessage"] span,
+[data-theme="dark"] [data-testid="stChatMessage"] div,
+.stApp[data-theme="dark"] [data-testid="stChatMessage"] div,
+[data-theme="dark"] [data-testid="stChatMessage"] strong,
+.stApp[data-theme="dark"] [data-testid="stChatMessage"] strong,
+[data-theme="dark"] [data-testid="stSidebar"] label,
+.stApp[data-theme="dark"] [data-testid="stSidebar"] label,
+[data-theme="dark"] [data-testid="stSidebar"] h1,
+.stApp[data-theme="dark"] [data-testid="stSidebar"] h1,
+[data-theme="dark"] [data-testid="stSidebar"] h2,
+.stApp[data-theme="dark"] [data-testid="stSidebar"] h2,
+[data-theme="dark"] [data-testid="stSidebar"] h3,
+.stApp[data-theme="dark"] [data-testid="stSidebar"] h3,
+[data-theme="dark"] [data-testid="stSidebar"] p,
+.stApp[data-theme="dark"] [data-testid="stSidebar"] p,
+[data-theme="dark"] [data-testid="stSidebar"] span,
+.stApp[data-theme="dark"] [data-testid="stSidebar"] span {
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] .tagline-brand,
+.stApp[data-theme="dark"] .tagline-brand {
+    color: #7dd3fc !important;
+}
+
+[data-theme="dark"] [data-testid="stChatInput"] textarea,
+.stApp[data-theme="dark"] [data-testid="stChatInput"] textarea {
+    color: #f8fafc !important;
+    -webkit-text-fill-color: #f8fafc !important;
+}
+
+[data-theme="dark"] [data-testid="stChatInput"] textarea::placeholder,
+.stApp[data-theme="dark"] [data-testid="stChatInput"] textarea::placeholder {
+    color: #cbd5e1 !important;
+    -webkit-text-fill-color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .stApp,
+.stApp[data-theme="dark"],
+[data-theme="dark"] [data-testid="stAppViewContainer"],
+.stApp[data-theme="dark"] [data-testid="stAppViewContainer"],
+[data-theme="dark"] [data-testid="stMainBlockContainer"],
+.stApp[data-theme="dark"] [data-testid="stMainBlockContainer"],
+[data-theme="dark"] section[data-testid="stSidebar"],
+.stApp[data-theme="dark"] section[data-testid="stSidebar"] {
+    background-color: #0f172a !important;
+}
+
+[data-theme="dark"] div.stButton > button,
+.stApp[data-theme="dark"] div.stButton > button {
+    background: rgba(0, 0, 0, 0.68) !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+    color: #f8fafc !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .metric-card,
+    .tagline-shell,
+    [data-testid="stChatMessage"],
+    [data-testid="stChatInput"] {
+        background: rgba(0, 0, 0, 0.68) !important;
+        border-color: rgba(255, 255, 255, 0.22) !important;
+        color: #f8fafc !important;
+    }
+
+    .metric-label,
+    .metric-val,
+    .tagline-copy,
+    .directive-heading,
+    [data-testid="stChatMessage"] p,
+    [data-testid="stChatMessage"] li,
+    [data-testid="stChatMessage"] span,
+    [data-testid="stChatMessage"] div,
+    [data-testid="stChatMessage"] strong,
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] h3,
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] span {
+        color: #f8fafc !important;
+    }
+
+    .tagline-brand {
+        color: #7dd3fc !important;
+    }
+}
+
+/* Streamlit 1.62 applies dark mode through the generated root class rather
+   than exposing data-theme; retain this compatibility path for that runtime. */
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) .metric-card,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) .tagline-shell,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stChatMessage"],
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stChatInput"] {
+    background: rgba(0, 0, 0, 0.68) !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+    color: #f8fafc !important;
+}
+
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) .metric-label,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) .metric-val,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) .tagline-copy,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) .directive-heading,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stChatMessage"] p,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stChatMessage"] li,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stChatMessage"] span,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stChatMessage"] div,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stChatMessage"] strong,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stSidebar"] label,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stSidebar"] h1,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stSidebar"] h2,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stSidebar"] h3,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stSidebar"] p,
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stSidebar"] span {
+    color: #f8fafc !important;
+}
+
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) .tagline-brand {
+    color: #7dd3fc !important;
+}
+
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) [data-testid="stChatInput"] textarea {
+    color: #f8fafc !important;
+    -webkit-text-fill-color: #f8fafc !important;
+}
+
+body:has(.stApp[class*="st-emotion-cache-13k62yr"]) div.stButton > button {
+    background: rgba(0, 0, 0, 0.68) !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+    color: #f8fafc !important;
+}
